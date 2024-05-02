@@ -49,12 +49,12 @@ const Stopwatch = () => {
     stopwatchIsRunning = false;
     setIsRunning(false);
   };
-
-  const handleReset = () => {
-    stopwatchIsRunning = false;
-    setIsRunning(false);
-    setElapsedTime(0);
-  };
+// убрать
+  // const handleReset = () => {
+  //   stopwatchIsRunning = false;
+  //   setIsRunning(false);
+  //   setElapsedTime(0);
+  // };
 
   const formatTime = (time) => {
     const milliseconds = Math.floor((time % 1000) / 10);
@@ -545,27 +545,51 @@ export class Whole extends React.Component {
     )
   }
 }
+import Workout from './components/workout'
+import { hints, types } from './data'
+
+function Workout(props) {
+  return (
+    <div className='sets'>
+      <h3 className="title">{props.title}</h3>
+      <ul>
+        <li className='set'>{props.set1}</li>
+        <li className='set'>{props.set2}</li>
+        <li className='set'>{props.set3}</li>
+        <li className='set'>{props.set4}</li>
+      </ul>
+    </div>
+  )
+}
+
+function Cue(props) {
+  <button>Подсказка</button>
+}
 
 function App() {
   return (
     <div className="wrapper">
-        <div className="workout">
-            <div className="title"></div>
-            <ol>
-              <li></li>
-            </ol>
-            <ol>
-              <li></li>
-            </ol>
-            <ol>
-              <li></li>
-            </ol>
-            <ol>
-              <li></li>
-            </ol>
-        </div>
-        
+      <h1>Заголовок</h1>
+      <div className='container'>
+        <Workout {...types[0]}/>
+        <Workout {...types[0]}/>
+      </div>
+      <div className='container'>
+        <Workout {...types[0]}/>
+        <Workout {...types[0]}/>
+      </div>
+      {/* <button className='pause'>Пауза</button> */}
+      {/* <button className='pause'>Завершить тренировку</button> */}
+      <div className='cues'>
+        {/* <Cue {...hints[0]}/>
+        <Cue {...hints[1]}/>
+        <Cue {...hints[2]}/> */}
+        <button>Подсказка</button>
+        <button>Подсказка</button>
+        <button>Подсказка</button>
+      </div>
     </div>
+    
   )}
 
 export default App;
