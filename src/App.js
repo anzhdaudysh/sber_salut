@@ -1,6 +1,5 @@
 // import logo from './logo.svg';
 // import './App.css';
-// scenario
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -39,13 +38,13 @@ const Stopwatch = () => {
     };
   }, [isRunning, startTime]);
 
-  const handleStart = () => {
+  export const handleStart = () => {
     stopwatchIsRunning = true;
     setIsRunning(true);
     setStartTime(Date.now() - elapsedTime);
   };
 
-  const handlePause = () => {
+  export const handlePause = () => {
     stopwatchIsRunning = false;
     setIsRunning(false);
   };
