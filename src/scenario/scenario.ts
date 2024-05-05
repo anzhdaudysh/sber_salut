@@ -10,9 +10,10 @@ import {
     NLPResponse,
     createIntents,
 } from '@salutejs/scenario';
-import {handlePause, handleStart} from '../App.js';
+import handlePause from '../App.js';
+import handleStart from '../App.js';
 import { SaluteMemoryStorage } from '@salutejs/storage-adapter-memory';
-import { runAppHandler, noMatchHandler, closeAppHander, stop_train, continue_train, done_train } from './handlers';
+import { runAppHandler, noMatchHandler, closeAppHander, stop_train, continue_train, done_train } from './handlers.js';
 
 
 const { regexp, action, text } = createMatchers<SaluteRequest>();
@@ -20,12 +21,13 @@ const { regexp, action, text } = createMatchers<SaluteRequest>();
 const userScenario = createUserScenario({
     stop_train:{
         match: regexp(/^Пристанови$/i),
-        handlePause(),
+        handlePause,
         handle: stop_train
     },
 
     continue_train:{
         match: regexp(/^Продолжи$/i),
+        handleStart,
         handle: continue_train
     },
 
