@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+// import { DeviceThemeProvider } from '@salutejs/plasma-ui/components/Device'; // Типографика, имеющая размеры, зависимые от типа устройства
+// import { GlobalStyle } from './GlobalStyle'; // Тема оформления (цветовая схема)
+import { body1, text, background, gradient } from '@salutejs/plasma-tokens';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -11,6 +13,13 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+// root.render(
+//   <DeviceThemeProvider responsiveTypo={true}>
+//     <GlobalStyle />
+//     <App />
+//   </DeviceThemeProvider>,
+// );
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
