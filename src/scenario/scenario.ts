@@ -19,6 +19,7 @@ import { runAppHandler, noMatchHandler, closeAppHander, stop_train, continue_tra
 const { regexp, action, text } = createMatchers<SaluteRequest>();
 
 const userScenario = createUserScenario({
+
     stop_train:{
         match: regexp(/^Пристанови$/i),
         handlePause,
@@ -35,50 +36,6 @@ const userScenario = createUserScenario({
         match: regexp(/^Заверши$/i),
         handle: done_train
     },
-
-    // restart: {
-    //     match: regexp(/^Заново$/i),
-    //     handle: restart,
-    // },
-
-    // setTime: {
-    //     match: regexp(/^Поставить(?: (?<hours>\d+) час)?(?: (?<minutes>\d+) минут.)?(?: (?<seconds>\d+) секунд.)?$/i, { normalized: true }),
-    //     handle: setTime,
-    // },
-
-    // setAnotherTime: {
-    //     match: regexp(/^(?:(?<hours>\d+) час(?:\s|$))?(?:(?<minutes>\d+) минут.(?:\s|$))?(?:(?<seconds>\d+) секунд.?(?:\s|$))?$/i, { normalized: true }),
-    //     handle: setTime,
-    // },
-
-    // move: {
-    //     match: regexp(/^(Сходить|Готовый)$/i),
-    //     handle: move,
-    // },
-
-    // chooseStart: {
-    //     match: regexp(/^(?:Начинать\s+)?(?<side>белый|черный)$/i, { normalized: true }),
-    //     handle: chooseStart,
-    // },
-
-    // help: {
-    //     match: regexp(/^Помощь$/i),
-    //     handle: preHelp,
-    // },
-    // help_button: {
-    //     match: action('help'),
-    //     handle: help
-    // },
-
-    // result: {
-    //     match: action('result'),
-    //     handle: result
-    // },
-
-    // button_restart: {
-    //     match: action('restart'),
-    //     handle: restart,
-    // }
 
 });
 
