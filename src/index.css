@@ -19,6 +19,9 @@ code {
 
 .title{
   margin: auto;
+  padding: 20px;
+  text-align: center;
+  font-size: 20px;
 }
 
 .sets {
@@ -26,6 +29,11 @@ code {
   border-radius: 20px;
   height: 40vh;
   width: 30vw;
+}
+
+.set {
+  list-style-type: none;
+  padding: 10px;
 }
 
 .wrapper {
@@ -37,8 +45,9 @@ code {
 }
 
 .container {
+  gap: 100px;
   padding: 50px;
-  display:flex
+  display:flex;
 }
 
 .cues {
@@ -48,4 +57,12 @@ code {
   border-radius: 5px;
 }
 
-/* .pause */
+.Workout {
+  padding: 20px;
+}
+
+.pause {
+  padding: 50px;
+}
+
+

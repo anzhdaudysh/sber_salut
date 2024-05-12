@@ -577,11 +577,11 @@ export default function App() {
       <h1 className='title'>Заголовок</h1>
       <div className='container'>
         <Workout {...types[0]}/>
-        <Workout {...types[0]}/>
+        <Workout {...types[1]}/>
       </div>
       <div className='container'>
-        <Workout {...types[0]}/>
-        <Workout {...types[0]}/>
+        <Workout {...types[2]}/>
+        <Workout {...types[3]}/>
       </div>
       <div className='btns'>
         <Button className='pause'>Пауза</Button>

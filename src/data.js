@@ -1,20 +1,27 @@
 export const types = [
     {
-        title: 'Силовая',
+        title: 'Кроссфит',
         set1: 'hbkjbjkbb',
         set2: 'hbkjbjkbb',
         set3: 'hbkjbjkbb',
         set4: 'hbkjbjkbb'
     },
     {
-        title: 'Силовая',
+        title: 'Стречинг',
         set1: 'hbkjbjkbb',
         set2: 'hbkjbjkbb',
         set3: 'hbkjbjkbb',
         set4: 'hbkjbjkbb'
     },
     {
-        title: 'Силовая',
+        title: 'Йога',
+        set1: 'hbkjbjkbb',
+        set2: 'hbkjbjkbb',
+        set3: 'hbkjbjkbb',
+        set4: 'hbkjbjkbb'
+    },
+    {
+        title: 'Кардио',
         set1: 'hbkjbjkbb',
         set2: 'hbkjbjkbb',
         set3: 'hbkjbjkbb',
