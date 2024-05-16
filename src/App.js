@@ -9,6 +9,10 @@ import { createSmartappDebugger, createAssistant } from "@salutejs/client";
 import { Container } from '@salutejs/plasma-ui/components/Grid';
 import { Button } from '@salutejs/plasma-ui';
 import { body1, text, background, gradient } from '@salutejs/plasma-tokens';
+import { accent } from '@salutejs/plasma-tokens';
+import { colorValues } from '@salutejs/plasma-tokens';
+
+console.log(colorValues.black); // –> '#080808'
 
 
 
@@ -586,6 +590,7 @@ export default function App() {
       <div className='btns'>
         <Button className='pause'>Пауза</Button>
         <Button className='pause'>Завершить тренировку</Button>
+        <Button text="Кнопка" size="s" view="primary" />
       </div>
       <div className='cues'>
         <Cue {...hints[0]}/>

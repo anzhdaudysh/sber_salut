@@ -5,6 +5,7 @@ import {
     background, // Цвет подложки
     gradient, // Градиент
 } from '@salutejs/plasma-tokens';
+import React from 'react';
 
 const DocumentStyle = createGlobalStyle`
     html {
