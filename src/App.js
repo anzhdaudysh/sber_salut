@@ -1,6 +1,4 @@
-// import logo from './logo.svg';
-// import './App.css';
-// scenario
+
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
@@ -12,7 +10,58 @@ import { body1, text, background, gradient } from '@salutejs/plasma-tokens';
 import { accent } from '@salutejs/plasma-tokens';
 import { colorValues } from '@salutejs/plasma-tokens';
 
-console.log(colorValues.black); // –> '#080808'
+import { hints, types } from './data'
+
+
+function Workout(props) {
+  return (
+    <div className='sets'>
+      <h3 className="title">{props.title}</h3>
+      <ul>
+        <li className='set'>{props.set1}</li>
+        <li className='set'>{props.set2}</li>
+        <li className='set'>{props.set3}</li>
+        <li className='set'>{props.set4}</li>
+      </ul>
+    </div>
+  )
+}
+
+function Cue(props) {
+  <button>Подсказка</button>
+}
+
+export default function App() {
+  return (
+    <div className='wrapper'>~
+      <h1 className='title'>Заголовок</h1>
+      <div className='container'>
+        <Workout {...types[0]}/>
+        <Workout {...types[1]}/>
+      </div>
+      <div className='container'>
+        <Workout {...types[2]}/>
+        <Workout {...types[3]}/>
+      </div>
+      <div className='btns'>
+        <Button className='pause'>Пауза</Button>
+        <Button className='pause'>Завершить тренировку</Button>
+        <Button text="Кнопка" size="s" view="primary" />
+      </div>
+      <div className='cues'>
+        <Cue {...hints[0]}/>
+        <Cue {...hints[1]}/>
+        <Cue {...hints[2]}/>
+        {/* <button>Подсказка</button>
+        <button>Подсказка</button>
+        <button>Подсказка</button> */}
+      </div>
+
+    </div>
+    
+  )}
+
+// console.log(colorValues.black); // –> '#080808'
 
 
 
@@ -555,55 +604,6 @@ console.log(colorValues.black); // –> '#080808'
 //   }
 // }
 // import Workout from './components/workout'
-import { hints, types } from './data'
-
-function Workout(props) {
-  return (
-    <div className='sets'>
-      <h3 className="title">{props.title}</h3>
-      <ul>
-        <li className='set'>{props.set1}</li>
-        <li className='set'>{props.set2}</li>
-        <li className='set'>{props.set3}</li>
-        <li className='set'>{props.set4}</li>
-      </ul>
-    </div>
-  )
-}
-
-function Cue(props) {
-  <button>Подсказка</button>
-}
-
-export default function App() {
-  return (
-    <div className='wrapper'>
-      <h1 className='title'>Заголовок</h1>
-      <div className='container'>
-        <Workout {...types[0]}/>
-        <Workout {...types[1]}/>
-      </div>
-      <div className='container'>
-        <Workout {...types[2]}/>
-        <Workout {...types[3]}/>
-      </div>
-      <div className='btns'>
-        <Button className='pause'>Пауза</Button>
-        <Button className='pause'>Завершить тренировку</Button>
-        <Button text="Кнопка" size="s" view="primary" />
-      </div>
-      <div className='cues'>
-        <Cue {...hints[0]}/>
-        <Cue {...hints[1]}/>
-        <Cue {...hints[2]}/>
-        {/* <button>Подсказка</button>
-        <button>Подсказка</button>
-        <button>Подсказка</button> */}
-      </div>
-
-    </div>
-    
-  )}
 
 
   /** Цвет предупреждения */
