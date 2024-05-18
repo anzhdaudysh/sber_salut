@@ -1,40 +1,37 @@
-
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createSmartappDebugger, createAssistant } from "@salutejs/client";
-
 import { Container } from '@salutejs/plasma-ui/components/Grid';
-import { Button } from '@salutejs/plasma-ui';
+import { Button, TextArea } from '@salutejs/plasma-ui';
 import { body1, text, background, gradient } from '@salutejs/plasma-tokens';
 import { accent } from '@salutejs/plasma-tokens';
 import { colorValues } from '@salutejs/plasma-tokens';
-
 import { hints, types } from './data'
-
+import { IconClock, clock } from '@salutejs/plasma-icons';
 
 function Workout(props) {
   return (
     <div className='sets'>
-      <h3 className="title">{props.title}</h3>
+      <div className='titleClock'>
+        <h3 className="title">{props.title}</h3>
+        <IconClock className='icon'/>
+      </div>
       <ul>
         <li className='set'>{props.set1}</li>
         <li className='set'>{props.set2}</li>
         <li className='set'>{props.set3}</li>
         <li className='set'>{props.set4}</li>
+        <li className='set'>{props.set5}</li>
       </ul>
     </div>
   )
 }
 
-function Cue(props) {
-  <button>Подсказка</button>
-}
-
 export default function App() {
   return (
-    <div className='wrapper'>~
-      <h1 className='title'>Заголовок</h1>
+    <div className='wrapper'>
+      {/* <h1 className='title'>Таймер для тренировки</h1> */}
       <div className='container'>
         <Workout {...types[0]}/>
         <Workout {...types[1]}/>
@@ -44,19 +41,11 @@ export default function App() {
         <Workout {...types[3]}/>
       </div>
       <div className='btns'>
-        <Button className='pause'>Пауза</Button>
-        <Button className='pause'>Завершить тренировку</Button>
-        <Button text="Кнопка" size="s" view="primary" />
+        <Button className='pause' text="Пауза" size="m" view="primary" />
+        <Button className='close' text="Завершить тренировку" size="m" view="primary" />        
+        <Button className='close' text="Перерыв" size="m" view="primary" /> 
+        
       </div>
-      <div className='cues'>
-        <Cue {...hints[0]}/>
-        <Cue {...hints[1]}/>
-        <Cue {...hints[2]}/>
-        {/* <button>Подсказка</button>
-        <button>Подсказка</button>
-        <button>Подсказка</button> */}
-      </div>
-
     </div>
     
   )}

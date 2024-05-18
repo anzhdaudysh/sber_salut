@@ -1,31 +1,35 @@
 export const types = [
     {
         title: 'Кроссфит',
-        set1: 'hbkjbjkbb',
-        set2: 'hbkjbjkbb',
-        set3: 'hbkjbjkbb',
-        set4: 'hbkjbjkbb'
+        set1: 'Бёрпи',
+        set2: 'Отжимания с хлопком',
+        set3: 'Махи гантелями',
+        set4: 'Приседания с выпрыгиванием',
+        set5: 'Выпады с прыжком'
     },
     {
         title: 'Стречинг',
-        set1: 'hbkjbjkbb',
-        set2: 'hbkjbjkbb',
-        set3: 'hbkjbjkbb',
-        set4: 'hbkjbjkbb'
+        set1: 'Наклоны вперед',
+        set2: 'Поза кошки-коровы',
+        set3: 'Растяжка подколенных сухожилий',
+        set4: 'Боковые наклоны',
+        set5: 'Растяжка квадрицепсов'
     },
     {
         title: 'Йога',
-        set1: 'hbkjbjkbb',
-        set2: 'hbkjbjkbb',
-        set3: 'hbkjbjkbb',
-        set4: 'hbkjbjkbb'
+        set1: 'Поза горы',
+        set2: 'Поза собаки мордой вниз',
+        set3: 'Поза воина',
+        set4: 'Поза дерева',
+        set5: 'Поза моста'
     },
     {
         title: 'Кардио',
-        set1: 'hbkjbjkbb',
-        set2: 'hbkjbjkbb',
-        set3: 'hbkjbjkbb',
-        set4: 'hbkjbjkbb'
+        set1: 'Бег на месте',
+        set2: 'Скакалка',
+        set3: 'Прыжки со сменой ног',
+        set4: 'Джампинг Джек',
+        set5: 'Бег с ускорением на месте'
     },
 ]
 export const hints = [

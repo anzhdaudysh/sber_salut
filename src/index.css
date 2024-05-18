@@ -18,9 +18,9 @@ code {
 }
 
 .title{
-  margin: auto;
-  padding: 20px;
-  text-align: center;
+  margin: auto 0 ;
+  padding: 10px;
+  /* text-align: center; */
   font-size: 20px;
 }
 
@@ -29,11 +29,13 @@ code {
   border-radius: 20px;
   height: 40vh;
   width: 30vw;
+  background-color: rgba(240, 248, 255, 0.24);
 }
 
 .set {
   list-style-type: none;
   padding: 10px;
+  
 }
 
 .wrapper {
@@ -46,8 +48,9 @@ code {
 
 .container {
   gap: 100px;
-  padding: 50px;
+  padding: 30px;
   display:flex;
+
 }
 
 .cues {
@@ -65,4 +68,19 @@ code {
   padding: 50px;
 }
 
+.btns {
+  width: 65vw;
+  display: flex;
+  justify-content: space-between;
+}
 
+.titleClock {
+  display: flex;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  width: 30vw;
+}
+
+.icon {
+  margin: 10px 10px 0 0;
+}

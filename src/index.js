@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client';
 import { DeviceThemeProvider, SSRProvider } from '@salutejs/plasma-ui';
 import { GlobalStyle } from './GlobalStyle';
 import App  from './App';
-
 import './index.css';
 // import reportWebVitals from './reportWebVitals';
 // import { body1, text, background, gradient } from '@salutejs/plasma-tokens';
