@@ -50,6 +50,8 @@ export default function App() {
     
   )}
 
+const train = document.querySelectorAll('container');
+console.log(train);
 // console.log(colorValues.black); // –> '#080808'
 
 
