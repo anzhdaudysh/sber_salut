@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect, useRef } from 'react';
 import { createRoot } from 'react-dom/client';
-import { createSmartappDebugger, createAssistant } from "@salutejs/client";
+import { createSmartappDebugger, createAssistant, InitialSettings } from "@salutejs/client";
 import { Container } from '@salutejs/plasma-ui/components/Grid';
 import { Button, TextArea } from '@salutejs/plasma-ui';
 import { body1, text, background, gradient } from '@salutejs/plasma-tokens';
@@ -10,9 +10,43 @@ import { colorValues } from '@salutejs/plasma-tokens';
 import { hints, types } from './data'
 import { IconClock, clock } from '@salutejs/plasma-icons';
 
+
+
+function Timer(){
+  // const [timeLeft, setTimeLeft] = useState(30 * 60); // 30 минут в секундах
+  // const [isRunning, setIsRunning] = useState(false);
+
+  // useEffect(() => {
+  //   let timer;
+  //   if (isRunning && timeLeft > 0) {
+  //     timer = setInterval(() => {
+  //       setTimeLeft(prevTime => prevTime - 1);
+  //     }, 1000);
+  //   } else if (timeLeft === 0) {
+  //     setIsRunning(false);
+  //   }
+  //   return () => clearInterval(timer);
+  // }, [isRunning, timeLeft]);
+
+  // const formatTime = (time) => {
+  //   const minutes = Math.floor(time / 60);
+  //   const seconds = time % 60;
+  //   return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  // };
+
+  // const handleButtonClick = () => {
+  //   setIsRunning(!isRunning);
+  // };
+
+  // return(
+  //   <h1>{formatTime(timeLeft)}</h1>
+  // )
+}
+
 function Workout(props) {
   return (
-    <div className='sets'>
+    <div className={`sets ${props.isActive ? 'active' : ''}`} 
+    onClick={props.onClick}>
       <div className='titleClock'>
         <h3 className="title">{props.title}</h3>
         <IconClock className='icon'/>
@@ -28,23 +62,107 @@ function Workout(props) {
   )
 }
 
+function Pause(){
+  return(
+    <Button className='pause' text="Пауза" size="m" view="primary" />  
+    )
+}
+
+function Continue(props){
+  return(
+  <Button className='continue' text="Продолжить" size="m" view="primary" />  
+  )
+}
+
 export default function App() {
+  // const [isPaused, setIsPaused] = useState(false);
+  // const [secondsLeft, setSecondsLeft] = useState(0);
+  // const [mode, setMode] = useState('work');  
+  const [timeLeft, setTimeLeft] = useState(30 * 60); // 30 минут в секундах
+  const [isRunning, setIsRunning] = useState(false);
+  const [activeWorkout, setActiveWorkout] = useState(null);
+
+  useEffect(() => {
+    let timer;
+    if (isRunning && timeLeft > 0) {
+      timer = setInterval(() => {
+        setTimeLeft(prevTime => prevTime - 1);
+      }, 1000);
+    } else if (timeLeft === 0) {
+      setIsRunning(false);
+    }
+    return () => clearInterval(timer);
+  }, [isRunning, timeLeft]);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  const handleButtonClick = () => {
+    setIsRunning(!isRunning);
+  };
+
+  const handleStartClick = () => {
+    setIsRunning(true);
+  };
+
+  const handleMainButtonClick = () => {
+    setIsRunning(!isRunning);
+  };
+
+  const handleWorkoutClick = (index) => {
+    setActiveWorkout(index);
+    setIsRunning(true);}
+
+  // function initTimer() {
+  //   setSecondsLeft{ value: 600};
+  // }
+
+  // useEffect( effect: () => {
+  //   initTimer();
+
+
+  //   setInterval( handler:  () => ){
+  //     if {isPaused} {
+  //       return;
+  //     }
+  //     if (secondsLeft === 0) {
+  //       return switchMode();
+  //     }
+
+
+  //     tick();
+  //   }, timeout:1000);
+  // })
+
   return (
     <div className='wrapper'>
-      {/* <h1 className='title'>Таймер для тренировки</h1> */}
+      <h1>{formatTime(timeLeft)}</h1>
       <div className='container'>
-        <Workout {...types[0]}/>
+        <Workout onClick={() => handleWorkoutClick(0)} isActive={activeWorkout === 0} {...types[0]} />
+        <Workout onClick={() => handleWorkoutClick(1)} isActive={activeWorkout === 1} {...types[1]} />
+      </div>
+      <div className='container'>
+        <Workout onClick={() => handleWorkoutClick(2)} isActive={activeWorkout === 2} {...types[2]} />
+        <Workout onClick={() => handleWorkoutClick(3)} isActive={activeWorkout === 3} {...types[3]} />
+      </div>
+      {/* <div className='container'>
+        <Workout onClick={handleStartClick} {...types[0]}/>
         <Workout {...types[1]}/>
       </div>
       <div className='container'>
         <Workout {...types[2]}/>
         <Workout {...types[3]}/>
-      </div>
+      </div> */}
       <div className='btns'>
-        <Button className='pause' text="Пауза" size="m" view="primary" />
+      <Button className='pause' text="Пауза" size="m" view="primary" onClick={handleButtonClick}>
+        {isRunning ? 'Пауза' : 'Продолжить'}
+      </Button>
+        {/* <Button className='pause' text="Пауза" size="m" view="primary" /> */}
         <Button className='close' text="Завершить тренировку" size="m" view="primary" />        
-        <Button className='close' text="Перерыв" size="m" view="primary" /> 
-        
+        <Button className='close' text="Перерыв" size="m" view="primary" />          
       </div>
     </div>
     

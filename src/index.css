@@ -84,3 +84,6 @@ code {
 .icon {
   margin: 10px 10px 0 0;
 }
+.sets.active {
+  background-color: red;
+}
