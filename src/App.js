@@ -38,7 +38,7 @@ function Pause(){
 
 function Continue(props){
   return(
-  <Button className='continue' text="Продолжить" size="m" view="primary" />  
+  <Button className='resume' text="Продолжить" size="m" view="primary" />  
   )
 }
 
@@ -117,8 +117,8 @@ export default function App() {
       <Button className='btn pause' text="Пауза" size="m" view="primary" onClick={handleButtonClick}>
         {isRunning ? 'Пауза' : 'Продолжить'}
       </Button>
-        <Button className='btn close' text="Завершить тренировку" size="m" view="primary" onClick={handleResetClick}  />        
-        <Button className='btn break' text="Перерыв" size="m" view="primary" onClick={handleBreakClick}/>          
+        <Button className='btn finish' text="Завершить тренировку" size="m" view="primary" onClick={handleResetClick}  />        
+        <Button className='btn rest' text="Перерыв" size="m" view="primary" onClick={handleBreakClick}/>          
       </div>
     </div>
     
