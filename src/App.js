@@ -11,6 +11,17 @@ import { hints, types } from './data'
 import { IconClock, clock } from '@salutejs/plasma-icons';
 
 
+const initializeAssistant = () => {
+  if (process.env.NODE_ENV === "development") {
+    return createSmartappDebugger({
+      token: process.env.REACT_APP_TOKEN ?? "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJqdGkiOiI0NDAwNWUyMS04M2IxLTQyMjUtODc3Ni0zYzAzYjZhZmFiODciLCJzdWIiOiJmZjAwMTRjNjFkNjJiZjVkMjZmNTViZmE4NDY0NDBjMGY3OWQ3NDBmNWEzN2M3NWRkNmYxMjIwMjA1MThhNDdlMWViNjYiLCJpc3MiOiJLRVlNQVNURVIiLCJleHAiOjE3MTc5MzI5OTgsImF1ZCI6IlZQUyIsInVzciI6IjcyOTYyZDYzLTAzNjItNDczMi1hZmM2LTAxM2FkMTc2MGU5OSIsImlhdCI6MTcxNzg0NjU4OCwic2lkIjoiOGMzMTI0NzEtYzhlOC00MGRhLTg4NjctMjAzYzYxNTM4YjAxIn0.MwYbT6i-tzeCV9O5J9pJKYxVxfvNMAiqG106nWgsCmrlKqucOX-FS994_1Bh8FrtxlY96Oya0TPL5HWir9fXtYK2CkFLseTGDvQzhoyvKMyqYim_1f9JSRg10GUeYpp5ximZbfwPmhgvo2v3HjTYwnBHSXYv_S1c3RFTm67zjmJB8_ANQvgm-meWC7sS08U7eo_85h2qsR6Fm5If9e-VhebKVTNGbliatfNlQ8JXXEVxCEIw7Ms8dZj3vwmvSYkmMIyuxNXCXgA5CU7AGE5sHMiAUSnqa-JO2FWbpo4yhU8YP9RHV_CV2Ozp3uN8vT_AlNdjQKhcDnW1Y9T_jH6Ut5i1Xtpt7YhBS077nrnt0R4lnWV6c70uOT8PDQlXBSm3YWRFOoI3fXRKgC7vlWq3nGdj9bRyJy8U5T6KSNHEAWygYGXCgdJHQ9cU4L3nIG96CbfKUH4J8OEuz35NEWi_rHlPyzpGyhRA9BqidG6xU-NDub7mUC-kNt6JZRksmL72dXUJ1I3P0CGIvUy-fsZnS7lY_bqV2tz9MmLc9MTl7McKRJqJ5N--3ZOxuoFkfM921PEm8d0pG0pblNk1kHA8BOcTDH_wanbONO6a1dz15dBzeY0fpU38duK6gK65Hp3KDKlVN6q0oT2e6xJwR7FH_tBwOShEcPbE3lBXjbOG4cM",
+      initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
+    });
+  }
+
+  return createAssistant();
+};
+
 function Workout(props) {
   return (
     <div className={`sets ${props.isActive ? 'active' : ''}`} 
