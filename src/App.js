@@ -30,17 +30,17 @@ function Workout(props) {
   )
 }
 
-function Pause(){
-  return(
-    <Button className='pause' text="Пауза" size="m" view="primary" />  
-    )
-}
+// function Pause(){
+//   return(
+//     <Button className='pause' text="Пауза" size="m" view="primary" />  
+//     )
+// }
 
-function Continue(props){
-  return(
-  <Button className='resume' text="Продолжить" size="m" view="primary" />  
-  )
-}
+// function Continue(props){
+//   return(
+//   <Button className='resume' text="Продолжить" size="m" view="primary" />  
+//   )
+// }
 
 export default function App() { 
   const [timeLeft, setTimeLeft] = useState(10 * 60); // 30 минут в секундах
@@ -48,27 +48,82 @@ export default function App() {
   const [activeWorkout, setActiveWorkout] = useState(null);
   const [breakTime, setBreakTime] = useState(false); // новое состояние
 
-  const initializeAssistant = () => {
-    if (process.env.NODE_ENV === "development") {
-      return createSmartappDebugger({
-        token: process.env.REACT_APP_TOKEN ?? "",
-        initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
-        getState
-      });
-    }
-  
-    return createAssistant();
+  const getState = () => {
+    return {
+      item_selector: {
+        items: [
+          { number: 1, id: 'workout_1', title: 'Workout 1', subtitle: '10 minutes' },
+          { number: 2, id: 'workout_2', title: 'Workout 2', subtitle: '10 minutes' },
+          { number: 3, id: 'workout_3', title: 'Workout 3', subtitle: '10 minutes' },
+          { number: 4, id: 'workout_4', title: 'Workout 4', subtitle: '10 minutes' },
+        ],
+      },
+    };
   };
 
-const assistant = createSmartappDebugger({
-    token: process.env.REACT_APP_TOKEN ?? '',
-    initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
-    getState,
-    enableRecord: true, // активируем функцию записи лога
-    recordParams: {
-      defaultActive: true, // включать запись при старте приложения (по-умолчанию = true)
+
+  const initializeAssistant = () => {
+    if (process.env.NODE_ENV === 'development') {
+      return createSmartappDebugger({
+        token: process.env.REACT_APP_TOKEN ?? '',
+        initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
+        getState,
+      });
     }
-  });
+    return createAssistant({ getState });
+  };
+  // const initializeAssistant = () => {
+  //   if (process.env.NODE_ENV === "development") {
+  //     return createSmartappDebugger({
+  //       token: process.env.REACT_APP_TOKEN ?? "",
+  //       initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
+  //       getState
+  //     });
+  //   }
+  
+  //   return createAssistant();
+  // };
+
+
+  useEffect(() => {
+    const assistant = initializeAssistant();
+    assistant.on('data', (event) => {
+      const { action } = event;
+      if (action) {
+        handleAssistantAction(action);
+      }
+    });
+  }, []);
+
+  const handleAssistantAction = (action) => {
+    switch (action.type) {
+      case 'start_workout':
+        const workoutIndex = action.payload.workoutIndex;
+        handleWorkoutClick(workoutIndex);
+        break;
+      case 'pause':
+        handleButtonClick();
+        break;
+      case 'reset':
+        handleResetClick();
+        break;
+      case 'break':
+        handleBreakClick();
+        break;
+      default:
+        console.log('Unknown action:', action);
+    }
+  };
+
+// const assistant = createSmartappDebugger({
+//     token: process.env.REACT_APP_TOKEN ?? '',
+//     initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
+//     getState,
+//     enableRecord: true, // активируем функцию записи лога
+//     recordParams: {
+//       defaultActive: true, // включать запись при старте приложения (по-умолчанию = true)
+//     }
+//   });
 
   
 
@@ -147,5 +202,3 @@ const assistant = createSmartappDebugger({
     
   )}
 
-const train = document.querySelectorAll('container');
-console.log(train);
