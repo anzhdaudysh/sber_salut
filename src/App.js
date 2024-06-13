@@ -155,7 +155,7 @@ export default function App() {
 
   return (
     <div className='wrapper'>
-      <h1 className='timer'>{formatTime(timeLeft)}</h1>
+
       <div className='containers'>
         <div className='container'>
           <Workout onClick={() => handleWorkoutClick(0)} isActive={activeWorkout === 0} {...types[0]} />
@@ -166,7 +166,7 @@ export default function App() {
           <Workout onClick={() => handleWorkoutClick(3)} isActive={activeWorkout === 3} {...types[3]} />
         </div>
         <div className='btns'>
-
+          <h1 className='timer'>{formatTime(timeLeft)}</h1>
           
           <Button className='btn pause' text="Пауза" size="m" view="primary" onClick={handleButtonClick}>
           {isRunning ? 'Пауза' : 'Продолжить'}
