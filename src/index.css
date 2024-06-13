@@ -5,10 +5,12 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 * {
   box-sizing: border-box;
+  width: 100%;
 }
 
 code {
@@ -17,13 +19,11 @@ code {
 }
 
 .timer{
-  margin: 0;
+  margin: 0 auto;
 }
 
 .title{
   margin: auto 15px ;
-  /* padding: 5px; */
-  /* text-align: center; */
   font-size: 20px;
 }
 
@@ -38,7 +38,6 @@ code {
 .set {
   list-style-type: none;
   padding: 8px;
-  
 }
 
 .wrapper {
@@ -47,13 +46,14 @@ code {
   justify-content: center;
   margin: auto;
   flex-direction: column;
+  width: 100%;
 }
 
 .container {
-  gap: 100px;
+  gap: 50px;
   padding: 30px;
   display:flex;
-
+  flex-direction: column;
 }
 
 .cues {
@@ -74,7 +74,8 @@ code {
 .btns {
   width: 65vw;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: space-around;
 }
 
 .titleClock {
@@ -93,4 +94,10 @@ code {
 
 .btn{
   width:15vw;
+}
+
+.containers{
+  display: flex;
+  margin: auto;
+  justify-content: space-between;
 }

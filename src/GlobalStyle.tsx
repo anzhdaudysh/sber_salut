@@ -1,10 +1,10 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
-import { salutejs_sber__dark } from '@salutejs/plasma-tokens/themes'; // Или один из списка: darkEva, darkJoy, lightEva, lightJoy, lightSber
+import { salutejs_sber__dark } from '@salutejs/plasma-tokens/themes'; 
 import {
-    text, // Цвет текста
-    background, // Цвет подложки
-    gradient, // Градиент
+    text, 
+    background, 
+    gradient, 
 } from '@salutejs/plasma-tokens';
 
 

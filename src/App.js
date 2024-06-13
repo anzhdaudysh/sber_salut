@@ -30,17 +30,6 @@ function Workout(props) {
   )
 }
 
-// function Pause(){
-//   return(
-//     <Button className='pause' text="Пауза" size="m" view="primary" />  
-//     )
-// }
-
-// function Continue(props){
-//   return(
-//   <Button className='resume' text="Продолжить" size="m" view="primary" />  
-//   )
-// }
 
 export default function App() { 
   const [timeLeft, setTimeLeft] = useState(10 * 60); // 30 минут в секундах
@@ -72,59 +61,43 @@ export default function App() {
     }
     return createAssistant({ getState });
   };
-  // const initializeAssistant = () => {
-  //   if (process.env.NODE_ENV === "development") {
-  //     return createSmartappDebugger({
-  //       token: process.env.REACT_APP_TOKEN ?? "",
-  //       initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
-  //       getState
-  //     });
-  //   }
-  
-  //   return createAssistant();
-  // };
 
 
   useEffect(() => {
     const assistant = initializeAssistant();
-    assistant.on('data', (event) => {
-      const { action } = event;
-      if (action) {
-        handleAssistantAction(action);
-      }
+  
+    assistant.on('data', ({ action }) => {
+      handleAssistantAction(action);
     });
   }, []);
+  
 
   const handleAssistantAction = (action) => {
+    if (!action || !action.type) {
+      console.log('Invalid action:', action);
+      return;
+    }
+  
     switch (action.type) {
-      case 'start_workout':
-        const workoutIndex = action.payload.workoutIndex;
-        handleWorkoutClick(workoutIndex);
-        break;
       case 'pause':
-        handleButtonClick();
+        if (isRunning) handleButtonClick();
         break;
-      case 'reset':
+      case 'resume':
+        if (!isRunning) handleButtonClick();
+        break;
+      case 'rest':
+        handleBreakClick();
+        break;
+      case 'finish':
         handleResetClick();
         break;
-      case 'break':
-        handleBreakClick();
+      case 'start':
+        if (action.id !== undefined) handleWorkoutClick(action.id);
         break;
       default:
         console.log('Unknown action:', action);
     }
   };
-
-// const assistant = createSmartappDebugger({
-//     token: process.env.REACT_APP_TOKEN ?? '',
-//     initPhrase: `Запусти ${process.env.REACT_APP_SMARTAPP}`,
-//     getState,
-//     enableRecord: true, // активируем функцию записи лога
-//     recordParams: {
-//       defaultActive: true, // включать запись при старте приложения (по-умолчанию = true)
-//     }
-//   });
-
   
 
   useEffect(() => {
@@ -150,8 +123,9 @@ export default function App() {
   };
 
   const handleButtonClick = () => {
-    setIsRunning(!isRunning);
+    setIsRunning(prevIsRunning => !prevIsRunning);
   };
+  
 
   const handleWorkoutClick = (index) => {
     if (activeWorkout === index) {
@@ -182,22 +156,26 @@ export default function App() {
   return (
     <div className='wrapper'>
       <h1 className='timer'>{formatTime(timeLeft)}</h1>
-      <div className='container'>
-        <Workout onClick={() => handleWorkoutClick(0)} isActive={activeWorkout === 0} {...types[0]} />
-        <Workout onClick={() => handleWorkoutClick(1)} isActive={activeWorkout === 1} {...types[1]} />
-      </div>
-      <div className='container'>
-        <Workout onClick={() => handleWorkoutClick(2)} isActive={activeWorkout === 2} {...types[2]} />
-        <Workout onClick={() => handleWorkoutClick(3)} isActive={activeWorkout === 3} {...types[3]} />
-      </div>
+      <div className='containers'>
+        <div className='container'>
+          <Workout onClick={() => handleWorkoutClick(0)} isActive={activeWorkout === 0} {...types[0]} />
+          <Workout onClick={() => handleWorkoutClick(1)} isActive={activeWorkout === 1} {...types[1]} />
+        </div>
+        <div className='container'>
+          <Workout onClick={() => handleWorkoutClick(2)} isActive={activeWorkout === 2} {...types[2]} />
+          <Workout onClick={() => handleWorkoutClick(3)} isActive={activeWorkout === 3} {...types[3]} />
+        </div>
+        <div className='btns'>
 
-      <div className='btns'>
-      <Button className='btn pause' text="Пауза" size="m" view="primary" onClick={handleButtonClick}>
-        {isRunning ? 'Пауза' : 'Продолжить'}
-      </Button>
-        <Button className='btn finish' text="Завершить тренировку" size="m" view="primary" onClick={handleResetClick}  />        
-        <Button className='btn rest' text="Перерыв" size="m" view="primary" onClick={handleBreakClick}/>          
+          
+          <Button className='btn pause' text="Пауза" size="m" view="primary" onClick={handleButtonClick}>
+          {isRunning ? 'Пауза' : 'Продолжить'}
+          </Button>
+          <Button className='btn finish' text="Завершить тренировку" size="m" view="primary" onClick={handleResetClick}  />        
+          <Button className='btn rest' text="Перерыв" size="m" view="primary" onClick={handleBreakClick}/>          
+        </div>
       </div>
+      
     </div>
     
   )}
