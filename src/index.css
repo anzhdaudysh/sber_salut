@@ -101,3 +101,34 @@ code {
   margin: auto;
   justify-content: space-between;
 }
+
+@media screen and (max-aspect-ratio: 1/1) {
+  .containers {
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .container {
+    flex-direction: row;
+  }
+  .timer {
+    margin-left: 40%;
+  }
+  .btns {
+    flex-direction: column;
+    width: 80vw;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-left: 10%;
+  }
+  .sets {
+    width: 40vw;
+    height: 20vh;
+  }
+  .btn {
+    width: 70vw;
+  }
+  .wrapper {
+    margin-left: 3%;
+  }
+}
