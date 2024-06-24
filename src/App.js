@@ -32,10 +32,10 @@ function Workout(props) {
 
 
 export default function App() { 
-  const [timeLeft, setTimeLeft] = useState(10 * 60); // 30 минут в секундах
+  const [timeLeft, setTimeLeft] = useState(10 * 60); 
   const [isRunning, setIsRunning] = useState(false);
   const [activeWorkout, setActiveWorkout] = useState(null);
-  const [breakTime, setBreakTime] = useState(false); // новое состояние
+  const [breakTime, setBreakTime] = useState(false);
 
   const getState = () => {
     return {
@@ -109,8 +109,8 @@ export default function App() {
     } else if (timeLeft === 0) {
       setIsRunning(false);
       if (breakTime) {
-        setTimeLeft(30 * 60); // возвращаем таймер в исходное состояние
-        setBreakTime(false); // выходим из режима перерыва
+        setTimeLeft(10 * 60); 
+        setBreakTime(false); 
       }
     }
     return () => clearInterval(timer);
@@ -135,7 +135,7 @@ export default function App() {
       }
     } else {
       setActiveWorkout(index);
-      setTimeLeft(10 * 60);  // Сброс таймера на 30 минут
+      setTimeLeft(10 * 60);  
       setIsRunning(true);
     }
   };
@@ -147,9 +147,9 @@ export default function App() {
     setActiveWorkout(null);
   };
   const handleBreakClick = () => {
-    setTimeLeft(1 * 60); // устанавливаем таймер на 5 минут
-    setIsRunning(true); // запускаем таймер
-    setBreakTime(true); // входим в режим перерыва
+    setTimeLeft(1 * 60); 
+    setIsRunning(true);
+    setBreakTime(true); 
   };
 
 
