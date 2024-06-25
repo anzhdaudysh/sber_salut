@@ -9,26 +9,27 @@ import { accent } from '@salutejs/plasma-tokens';
 import { colorValues } from '@salutejs/plasma-tokens';
 import { hints, types } from './data'
 import { IconClock, clock } from '@salutejs/plasma-icons';
+import Workout from './components/Workout';
 
 
-function Workout(props) {
-  return (
-    <div className={`sets ${props.isActive ? 'active' : ''}`} 
-    onClick={props.onClick}>
-      <div className='titleClock'>
-        <h3 className="title">{props.title}</h3>
-        <IconClock className='icon'/>
-      </div>
-      <ul>
-        <li className='set'>{props.set1}</li>
-        <li className='set'>{props.set2}</li>
-        <li className='set'>{props.set3}</li>
-        <li className='set'>{props.set4}</li>
-        <li className='set'>{props.set5}</li>
-      </ul>
-    </div>
-  )
-}
+// function Workout(props) {
+//   return (
+//     <div className={`sets ${props.isActive ? 'active' : ''}`} 
+//     onClick={props.onClick}>
+//       <div className='titleClock'>
+//         <h3 className="title">{props.title}</h3>
+//         <IconClock className='icon'/>
+//       </div>
+//       <ul>
+//         <li className='set'>{props.set1}</li>
+//         <li className='set'>{props.set2}</li>
+//         <li className='set'>{props.set3}</li>
+//         <li className='set'>{props.set4}</li>
+//         <li className='set'>{props.set5}</li>
+//       </ul>
+//     </div>
+//   )
+// }
 
 
 export default function App() { 
@@ -36,6 +37,9 @@ export default function App() {
   const [isRunning, setIsRunning] = useState(false);
   const [activeWorkout, setActiveWorkout] = useState(null);
   const [breakTime, setBreakTime] = useState(false);
+  const [currentExercise, setCurrentExercise] = useState(0);
+  const [exerciseTimeLeft, setExerciseTimeLeft] = useState(2 * 60);
+
 
   const getState = () => {
     return {
@@ -116,6 +120,24 @@ export default function App() {
     return () => clearInterval(timer);
   }, [isRunning, timeLeft, breakTime]);
 
+  useEffect(() => {
+    let exerciseTimer;
+    if (isRunning && exerciseTimeLeft > 0) {
+      exerciseTimer = setInterval(() => {
+        setExerciseTimeLeft(prevTime => prevTime - 1);
+      }, 1000);
+    } else if (exerciseTimeLeft === 0) {
+      if (currentExercise < 4) {
+        setCurrentExercise(prev => prev + 1);
+        setExerciseTimeLeft(2 * 60);
+      } else {
+        setIsRunning(false);
+      }
+    }
+    return () => clearInterval(exerciseTimer);
+  }, [isRunning, exerciseTimeLeft, currentExercise]);
+
+
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -135,7 +157,8 @@ export default function App() {
       }
     } else {
       setActiveWorkout(index);
-      setTimeLeft(10 * 60);  
+      setExerciseTimeLeft(2 * 60); 
+      setCurrentExercise(0); 
       setIsRunning(true);
     }
   };
@@ -145,6 +168,8 @@ export default function App() {
     setTimeLeft(10 * 60);  
     setIsRunning(false);
     setActiveWorkout(null);
+    setCurrentExercise(0);
+    setExerciseTimeLeft(2 * 60);
   };
   const handleBreakClick = () => {
     setTimeLeft(1 * 60); 
@@ -158,12 +183,22 @@ export default function App() {
 
       <div className='containers'>
         <div className='container'>
-          <Workout onClick={() => handleWorkoutClick(0)} isActive={activeWorkout === 0} {...types[0]} />
+        {types.map((workout, index) => (
+            <Workout
+              key={index}
+              onClick={() => handleWorkoutClick(index)}
+              isActive={activeWorkout === index}
+              currentExercise={currentExercise}
+              exerciseTimeLeft={exerciseTimeLeft}
+              {...workout}
+            />
+          ))}
+          {/* <Workout onClick={() => handleWorkoutClick(0)} isActive={activeWorkout === 0} {...types[0]} />
           <Workout onClick={() => handleWorkoutClick(1)} isActive={activeWorkout === 1} {...types[1]} />
         </div>
         <div className='container'>
           <Workout onClick={() => handleWorkoutClick(2)} isActive={activeWorkout === 2} {...types[2]} />
-          <Workout onClick={() => handleWorkoutClick(3)} isActive={activeWorkout === 3} {...types[3]} />
+          <Workout onClick={() => handleWorkoutClick(3)} isActive={activeWorkout === 3} {...types[3]} /> */}
         </div>
         <div className='btns'>
           <h1 className='timer'>{formatTime(timeLeft)}</h1>
