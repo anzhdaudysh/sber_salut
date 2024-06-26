@@ -5,12 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
 }
 
 * {
   box-sizing: border-box;
-  width: 100%;
 }
 
 code {
@@ -18,12 +16,12 @@ code {
     monospace;
 }
 
-.timer{
+.timer {
   margin: 0 auto;
 }
 
-.title{
-  margin: auto 15px ;
+.title {
+  margin: auto 15px;
   font-size: 20px;
 }
 
@@ -33,6 +31,7 @@ code {
   height: 35vh;
   width: 30vw;
   background-color: rgba(240, 248, 255, 0.24);
+  margin: 25px; /* расстояние между контейнерами */
 }
 
 .set {
@@ -44,16 +43,23 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: auto;
   flex-direction: column;
   width: 100%;
 }
 
-.container {
-  gap: 50px;
+.containers {
+  display: flex;
+  flex-wrap: wrap; /* для возможности переноса на новую строку */
+  justify-content: center;
+  gap: 50px; /* расстояние между контейнерами */
   padding: 30px;
-  display:flex;
-  flex-direction: column;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap; /* для возможности переноса на новую строку */
+  justify-content: center;
+  gap: 50px; /* расстояние между контейнерами */
 }
 
 .cues {
@@ -87,19 +93,15 @@ code {
 .icon {
   margin: 10px 10px 0 0;
 }
+
 .sets.active {
   background-color: red;
 }
 
-.btn{
-  width:15vw;
+.btn {
+  width: 15vw;
 }
 
-.containers{
-  display: flex;
-  margin: auto;
-  justify-content: space-between;
-}
 
 @media screen and (max-aspect-ratio: 1/1) {
   .containers {
