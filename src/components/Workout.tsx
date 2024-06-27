@@ -19,21 +19,21 @@ const Workout: React.FC<WorkoutProps> = ({ title, set1, set2, set3, set4, set5, 
     const exercises = [set1, set2, set3, set4, set5];
 
     return (
-        <div className={`sets ${isActive ? 'active' : ''}`} onClick={onClick}>
+    <div className={`sets ${isActive ? 'active' : ''}`} onClick={onClick}>
         <div className='titleClock'>
         <h3 className="title">{title}</h3>
         {isActive && <h3 className='exercise-timer'>{formatTime(exerciseTimeLeft)}</h3>}
         <IconClock className='icon'/>
-      </div>
-      <ul>
-        {exercises.map((exercise, index) => (
-          <li key={index} className='set' style={{ fontWeight: isActive && currentExercise === index ? 'bold' : '300' }}>
-            {exercise}
-          </li>
-        ))}
-      </ul>
     </div>
-  );
+    <ul>
+        {exercises.map((exercise, index) => (
+        <li key={index} className='set' style={{ fontWeight: isActive && currentExercise === index ? 'bold' : '300' }}>
+        {exercise}
+        </li>
+        ))}
+    </ul>
+    </div>
+);
 };
 
 

@@ -125,7 +125,7 @@ code {
 }
 
 .exercise-timer{
-  margin: 10px -50% 0 0;
+  margin: 10px -43% 0 0;
 }
 
 @media screen and (max-aspect-ratio: 1/1) {
@@ -145,7 +145,7 @@ code {
     justify-content: center;
     align-items: center;
     gap: 15px;
-    margin-left: 10%;
+    margin-left: 15%;
   }
   .sets {
     width: 40vw;
@@ -156,5 +156,13 @@ code {
   }
   .wrapper {
     margin-left: 3%;
+    flex-direction: column;
+  }
+  .bigContainer{
+    margin-top: 50px;
+    height: 60%;
+  }
+  .icon{
+    margin-left: 80%;
   }
 }
