@@ -36,6 +36,7 @@ export default function App() {
   const [timeLeft, setTimeLeft] = useState(10 * 60); 
   const [isRunning, setIsRunning] = useState(false);
   const [activeWorkout, setActiveWorkout] = useState(null);
+  const [activeWorkoutIndex, setActiveWorkoutIndex] = useState(null);
   const [breakTime, setBreakTime] = useState(false);
   const [currentExercise, setCurrentExercise] = useState(0);
   const [exerciseTimeLeft, setExerciseTimeLeft] = useState(2 * 60);
@@ -156,6 +157,7 @@ export default function App() {
         setActiveWorkout(null);
       }
     } else {
+      setActiveWorkoutIndex(index);
       setActiveWorkout(index);
       setExerciseTimeLeft(2 * 60); 
       setCurrentExercise(0); 
@@ -168,6 +170,7 @@ export default function App() {
     setTimeLeft(10 * 60);  
     setIsRunning(false);
     setActiveWorkout(null);
+    setActiveWorkoutIndex(null);
     setCurrentExercise(0);
     setExerciseTimeLeft(2 * 60);
   };
@@ -179,27 +182,29 @@ export default function App() {
 
 
   return (
-    <div className='wrapper'>
-
+  <div className='wrapper'>
+    <div className='bigContainer'>
       <div className='containers'>
         <div className='container'>
-        {types.map((workout, index) => (
-            <Workout
-              key={index}
-              onClick={() => handleWorkoutClick(index)}
-              isActive={activeWorkout === index}
-              currentExercise={currentExercise}
-              exerciseTimeLeft={exerciseTimeLeft}
-              {...workout}
-            />
-          ))}
-          {/* <Workout onClick={() => handleWorkoutClick(0)} isActive={activeWorkout === 0} {...types[0]} />
-          <Workout onClick={() => handleWorkoutClick(1)} isActive={activeWorkout === 1} {...types[1]} />
+        {types.map((type, index) => (
+          <Workout 
+            key={index}
+            title={type.title}
+            set1={type.set1}
+            set2={type.set2}
+            set3={type.set3}
+            set4={type.set4}
+            set5={type.set5}
+            isActive={index === activeWorkoutIndex}
+            onClick={() => handleWorkoutClick(index)}
+            currentExercise={activeWorkoutIndex === index ? currentExercise : -1}
+            exerciseTimeLeft={exerciseTimeLeft}
+          />
+        ))}
         </div>
-        <div className='container'>
-          <Workout onClick={() => handleWorkoutClick(2)} isActive={activeWorkout === 2} {...types[2]} />
-          <Workout onClick={() => handleWorkoutClick(3)} isActive={activeWorkout === 3} {...types[3]} /> */}
-        </div>
+      </div>
+    </div>  
+    <div className='bigContainer'>
         <div className='btns'>
           <h1 className='timer'>{formatTime(timeLeft)}</h1>
           
@@ -210,8 +215,8 @@ export default function App() {
           <Button className='btn rest' text="Перерыв" size="m" view="primary" onClick={handleBreakClick}/>          
         </div>
       </div>
-      
     </div>
+
     
   )}
 
