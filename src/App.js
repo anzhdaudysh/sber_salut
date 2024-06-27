@@ -175,6 +175,9 @@ export default function App() {
     setExerciseTimeLeft(2 * 60);
   };
   const handleBreakClick = () => {
+    setActiveWorkout(null);
+    setActiveWorkoutIndex(null);
+    setCurrentExercise(0);
     setTimeLeft(1 * 60); 
     setIsRunning(true);
     setBreakTime(true); 
